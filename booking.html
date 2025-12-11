@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Appointment | Kamdies Skincare Spa</title>
+    <meta name="description"
+        content="Schedule your appointment at Kamdies Skincare Spa online. Choose your service, date, and time.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .booking-container {
+            max-width: 800px;
+            margin: -100px auto 100px;
+            background: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 10;
+        }
+
+        .step-indicators {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .step-indicators::before {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #eee;
+            z-index: -1;
+        }
+
+        .step {
+            background: #fff;
+            padding: 0 10px;
+            text-align: center;
+            color: #ccc;
+        }
+
+        .step.active {
+            color: var(--color-gold);
+            font-weight: 700;
+        }
+
+        .step-circle {
+            width: 30px;
+            height: 30px;
+            background: #eee;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 5px;
+            color: #fff;
+        }
+
+        .step.active .step-circle {
+            background: var(--color-gold);
+        }
+
+        .step-content {
+            display: none;
+        }
+
+        .step-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .service-option,
+        .time-slot {
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .service-option:hover,
+        .service-option.selected,
+        .time-slot:hover,
+        .time-slot.selected {
+            border-color: var(--color-gold);
+            background-color: rgba(199, 166, 109, 0.05);
+        }
+
+        .form-actions {
+            margin-top: 30px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .error-msg {
+            color: #dc3545;
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            display: none;
+            font-size: 0.9rem;
+        }
+
+        .input-error {
+            border-color: #dc3545 !important;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container navbar">
+            <a href="index.html" class="logo">Kamdies<span class="text-gold">Spa</span></a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#about">About Us</a></li>
+                <li><a href="index.html#services">Services</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="index.html#gallery">Gallery</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="booking.html" class="active">Book Now</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Page Header (Short) -->
+    <section class="page-header" style="background: var(--color-charcoal); padding: 120px 0 150px; text-align: center;">
+        <div class="container">
+            <h1 style="color: #fff;">Book Your Appointment</h1>
+        </div>
+    </section>
+
+    <!-- Booking Form -->
+    <div class="container">
+        <div class="booking-container">
+
+            <div class="step-indicators">
+                <div class="step active" id="stepIndicator1">
+                    <div class="step-circle">1</div>
+                    <span>Service</span>
+                </div>
+                <div class="step" id="stepIndicator2">
+                    <div class="step-circle">2</div>
+                    <span>Time</span>
+                </div>
+                <div class="step" id="stepIndicator3">
+                    <div class="step-circle">3</div>
+                    <span>Details</span>
+                </div>
+                <div class="step" id="stepIndicator4">
+                    <div class="step-circle">4</div>
+                    <span>Done</span>
+                </div>
+            </div>
+
+            <form id="bookingForm" onsubmit="return false;">
+
+                <!-- Step 1: Service Selection -->
+                <div class="step-content active" id="step1">
+                    <h3>Select Service Category</h3>
+                    <div class="error-msg" id="errorMsg1">Please select a service to proceed.</div>
+                    <div class="service-option" onclick="selectService(this, 'Facial Treatment')">
+                        <h4>Facial Treatment</h4>
+                        <p>Deep cleansing, Acne Treatment, Anti-Aging</p>
+                    </div>
+                    <div class="service-option" onclick="selectService(this, 'Massage Therapy')">
+                        <h4>Massage Therapy</h4>
+                        <p>Swedish, Deep Tissue, Hot Stone</p>
+                    </div>
+                    <div class="service-option" onclick="selectService(this, 'Body Treatment')">
+                        <h4>Body Treatment</h4>
+                        <p>Scrub, Polish, Steam Bath</p>
+                    </div>
+                    <div class="service-option" onclick="selectService(this, 'Consultation')">
+                        <h4>Consultation</h4>
+                        <p>Skin Analysis (In-person or Online)</p>
+                    </div>
+                    <input type="hidden" id="selectedService">
+
+                    <div class="form-actions" style="justify-content: flex-end;">
+                        <button type="button" class="btn btn-primary" onclick="nextStep(2)">Next Step</button>
+                    </div>
+                </div>
+
+                <!-- Step 2: Date & Time -->
+                <div class="step-content" id="step2">
+                    <h3>Choose Date & Time</h3>
+                    <div class="error-msg" id="errorMsg2">Please select both a date and a time slot.</div>
+                    <div style="margin-bottom: 20px;">
+                        <label style="display: block; margin-bottom: 8px;">Select Date</label>
+                        <input type="date" id="bookingDate"
+                            style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px;">
+                    </div>
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
+                        <div class="time-slot" onclick="selectTime(this)">09:00 AM</div>
+                        <div class="time-slot" onclick="selectTime(this)">11:00 AM</div>
+                        <div class="time-slot" onclick="selectTime(this)">01:00 PM</div>
+                        <div class="time-slot" onclick="selectTime(this)">03:00 PM</div>
+                        <div class="time-slot" onclick="selectTime(this)">05:00 PM</div>
+                    </div>
+                    <input type="hidden" id="selectedTime">
+
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-outline" onclick="prevStep(1)">Back</button>
+                        <button type="button" class="btn btn-primary" onclick="nextStep(3)">Next Step</button>
+                    </div>
+                </div>
+
+                <!-- Step 3: Personal Details -->
+                <div class="step-content" id="step3">
+                    <h3>Your Details</h3>
+                    <div class="error-msg" id="errorMsg3">Please fill in all required fields correctly.</div>
+                    <div style="margin-bottom: 15px;">
+                        <label>Full Name <span style="color: red">*</span></label>
+                        <input type="text" class="form-control" id="fullName"
+                            style="width: 100%; padding: 12px; border: 1px solid #ddd; margin-top: 5px;">
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <label>Phone Number <span style="color: red">*</span></label>
+                        <input type="tel" class="form-control" id="phoneNumber"
+                            style="width: 100%; padding: 12px; border: 1px solid #ddd; margin-top: 5px;">
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <label>Email Address <span style="color: red">*</span></label>
+                        <input type="email" class="form-control" id="email"
+                            style="width: 100%; padding: 12px; border: 1px solid #ddd; margin-top: 5px;">
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-outline" onclick="prevStep(2)">Back</button>
+                        <button type="button" class="btn btn-primary" onclick="nextStep(4)">Confirm Booking</button>
+                    </div>
+                </div>
+
+                <!-- Step 4: Confirmation -->
+                <div class="step-content" id="step4" style="text-align: center;">
+                    <i class="fas fa-check-circle" style="font-size: 4rem; color: #27ae60; margin-bottom: 20px;"></i>
+                    <h2>Booking Request Sent!</h2>
+                    <p>Thank you for choosing Kamdies Spa. We have received your request and will contact you shortly to
+                        confirm your appointment.</p>
+                    <p style="margin-top: 20px; font-weight: 600;">Need immediate confirmation?</p>
+                    <a href="https://wa.me/2348141230911" class="btn btn-outline" style="margin-top: 10px;">Chat on
+                        WhatsApp</a>
+
+                    <div class="form-actions" style="justify-content: center; margin-top: 40px;">
+                        <a href="index.html" class="btn btn-primary">Return Home</a>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="copyright">
+                <p>&copy; 2024 Kamdies Skincare Spa. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Additional localized script for booking form state
+        // Additional localized script for booking form state
+        function selectService(el, service) {
+            document.querySelectorAll('.service-option').forEach(opt => opt.classList.remove('selected'));
+            el.classList.add('selected');
+            document.getElementById('selectedService').value = service;
+            hideError(1);
+        }
+        function selectTime(el) {
+            document.querySelectorAll('.time-slot').forEach(opt => opt.classList.remove('selected'));
+            el.classList.add('selected');
+            document.getElementById('selectedTime').value = el.innerText;
+            hideError(2);
+        }
+
+        function hideError(step) {
+            const errorMsg = document.getElementById('errorMsg' + step);
+            if (errorMsg) errorMsg.style.display = 'none';
+            // Remove red borders if any
+            const stepDiv = document.getElementById('step' + step);
+            stepDiv.querySelectorAll('input').forEach(input => input.classList.remove('input-error'));
+        }
+
+        function validateStep(step) {
+            let isValid = true;
+            const errorMsg = document.getElementById('errorMsg' + step);
+
+            if (step === 1) {
+                const service = document.getElementById('selectedService').value;
+                if (!service) isValid = false;
+            }
+            else if (step === 2) {
+                const date = document.getElementById('bookingDate').value;
+                const time = document.getElementById('selectedTime') ? document.getElementById('selectedTime').value : '';
+
+                if (!date) {
+                    document.getElementById('bookingDate').classList.add('input-error');
+                    isValid = false;
+                }
+                if (!time) {
+                    // Visual feedback for time slots is tricky with just class, but generic error msg helps
+                    isValid = false;
+                }
+            }
+            else if (step === 3) {
+                const name = document.getElementById('fullName');
+                const phone = document.getElementById('phoneNumber');
+                const email = document.getElementById('email');
+
+                if (!name.value.trim()) {
+                    name.classList.add('input-error');
+                    isValid = false;
+                }
+                if (!phone.value.trim()) {
+                    phone.classList.add('input-error');
+                    isValid = false;
+                }
+                if (!email.value.trim() || !email.value.includes('@')) {
+                    email.classList.add('input-error');
+                    isValid = false;
+                }
+            }
+
+            if (!isValid && errorMsg) {
+                errorMsg.style.display = 'block';
+            }
+            return isValid;
+        }
+
+        function nextStep(step) {
+            // Validate current step (which is step - 1)
+            const currentStep = step - 1;
+            if (!validateStep(currentStep)) {
+                return;
+            }
+
+            document.querySelectorAll('.step-content').forEach(el => el.classList.remove('active'));
+            document.getElementById('step' + step).classList.add('active');
+
+            // Update indicators
+            document.querySelectorAll('.step').forEach((el, index) => {
+                if (index < step) el.classList.add('active');
+            });
+        }
+
+        function prevStep(step) {
+            document.querySelectorAll('.step-content').forEach(el => el.classList.remove('active'));
+            document.getElementById('step' + step).classList.add('active');
+
+            // Update indicators
+            document.querySelectorAll('.step').forEach((el, index) => {
+                if (index >= step) el.classList.remove('active');
+                // Ensure current step is active
+                if (index + 1 === step) el.classList.add('active');
+            });
+        }
+
+        // Add listeners to remove error on input
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('input', function () {
+                this.classList.remove('input-error');
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Kamdies Skincare Spa</title>
+    <meta name="description"
+        content="Visit us in Enugu or Asaba. Contact Kamdies Skincare Spa for appointments and inquiries.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container navbar">
+            <a href="index.html" class="logo">Kamdies<span class="text-gold">Spa</span></a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#about">About Us</a></li>
+                <li><a href="index.html#services">Services</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="index.html#gallery">Gallery</a></li>
+                <li><a href="contact.html" class="active">Contact</a></li>
+                <li><a href="booking.html" class="btn btn-primary">Book Now</a></li>
+            </ul>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header"
+        style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1596178060671-7a80e70d7a42?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') center/cover; padding: 150px 0 100px; text-align: center;">
+        <div class="container">
+            <h1 style="color: #fff; font-size: 3.5rem;">Get in Touch</h1>
+            <p style="color: #fff; font-size: 1.2rem; margin-top: 15px;">We'd love to hear from you.</p>
+        </div>
+    </section>
+
+    <!-- Contact Info & Form -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="contact-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 50px;">
+                <!-- Left: Info -->
+                <div class="contact-info">
+                    <h2 style="margin-bottom: 30px;">Visit Our Locations</h2>
+
+                    <div class="location-block" style="margin-bottom: 40px;">
+                        <h3 class="text-gold"><i class="fas fa-map-marker-alt"></i> Enugu Branch</h3>
+                        <p style="margin-bottom: 10px;">By Ibusa Avenue, NO 23E MBAUKWU STREET<br>After Ozom Hotel,
+                            Independence layout, Enugu State.</p>
+                        <p><strong>Hotline:</strong> 0806 593 4279</p>
+                    </div>
+
+                    <div class="location-block" style="margin-bottom: 40px;">
+                        <h3 class="text-gold"><i class="fas fa-map-marker-alt"></i> Asaba Branch</h3>
+                        <p style="margin-bottom: 10px;">Micheal Njokanma Avenue, Off Dr. Ifeanyi Ashiedu street<br>Off
+                            High court Road Okpanam Road Asaba, Delta state.</p>
+                        <p><strong>Hotline:</strong> 0913 459 7654</p>
+                    </div>
+
+                    <div class="location-block">
+                        <h3 class="text-gold"><i class="fas fa-globe-africa"></i> Online Consultations</h3>
+                        <p style="margin-bottom: 10px;">Available worldwide via WhatsApp Video/Audio.</p>
+                        <p><strong>Hotline:</strong> 0803 457 4836</p>
+                    </div>
+                </div>
+
+                <!-- Right: Form -->
+                <div class="contact-form-wrapper"
+                    style="background: #fff; padding: 40px; box-shadow: var(--card-shadow); border-radius: 8px;">
+                    <h3 style="margin-bottom: 20px;">Send a Message</h3>
+                    <form id="contactForm"
+                        onsubmit="event.preventDefault(); alert('Message sent! We will engage with you shortly.');">
+                        <div class="form-group" style="margin-bottom: 20px;">
+                            <label style="display: block; margin-bottom: 8px; font-weight: 600;">Full Name</label>
+                            <input type="text" required
+                                style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px;">
+                        </div>
+                        <div class="form-group" style="margin-bottom: 20px;">
+                            <label style="display: block; margin-bottom: 8px; font-weight: 600;">Email Address</label>
+                            <input type="email" required
+                                style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px;">
+                        </div>
+                        <div class="form-group" style="margin-bottom: 20px;">
+                            <label style="display: block; margin-bottom: 8px; font-weight: 600;">Subject</label>
+                            <select style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px;">
+                                <option>General Enquiry</option>
+                                <option>Booking Issue</option>
+                                <option>Product Enquiry</option>
+                                <option>Partnership/Press</option>
+                            </select>
+                        </div>
+                        <div class="form-group" style="margin-bottom: 20px;">
+                            <label style="display: block; margin-bottom: 8px; font-weight: 600;">Message</label>
+                            <textarea rows="5" required
+                                style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px;"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="map-section">
+        <!-- Placeholder for Map Embeds (e.g. Google Maps Iframes) -->
+        <div
+            style="background-color: #eee; height: 400px; display: flex; align-items: center; justify-content: center; color: #777;">
+            <p>Google Maps Embed would go here (Requires API Key or Embed Code)</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="copyright">
+                <p>&copy; 2024 Kamdies Skincare Spa. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
